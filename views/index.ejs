@@ -3,12 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index</title>
+    <title>Home</title>
 </head>
 <body>
-    <a href="/sign-up">Sign-Up</a><br>
-    <a href="/log-in">Log-in</a><br>
-    <a href="/member">Member</a><br>
-    <a href="/admin">Admin</a>
+    <% if(user) { %>
+        <form action="/log-out" method="post">
+            <button type="submit">Log-out</button>
+        </form>
+        <% if(user.isadmin) { %>
+            <button>+ New Message</button>
+            <div>
+                <% for(let i=0;i<messages.length;i++) { %>
+                    <div>
+                        <h2>Author:<%=messages[i].firstname+" "+messages[i].lastname%></h2>
+                        <h3>@<%=messages[i].username%></h3>
+                        <h3><%= messages[i].title %></h3>
+                        <p><%= messages[i].text %></p>
+                        <p>Posted on : <%= messages[i].created_at %> </p>
+                        <button>Delete this message</button>
+                    </div>
+                <% } %>
+            </div>
+        <%} else if(user.ismember) { %>
+            <button onclick="window.location.href='/admin'">Become an admin</button>
+            <button>+ New Message</button>
+            <div>
+                <% for(let i=0;i<messages.length;i++) { %>
+                    <div>
+                        <h2>Author:<%=messages[i].firstname+" "+messages[i].lastname%></h2>
+                        <h3>@<%=messages[i].username%></h3>
+                        <h3><%= messages[i].title %></h3>
+                        <p><%= messages[i].text %></p>
+                        <p>Posted on : <%= messages[i].created_at %> </p>
+                    </div>
+                <% } %>
+            </div>
+        <%} else {%>
+            <button onclick="window.location.href='/member'" >Become a member</button>
+            <button>+ New Message</button>
+            <div>
+                <% for(let i=0;i<messages.length;i++) { %>
+                    <div>
+                        <h2>Author: anonymous </h2>
+                        <h3><%= messages[i].title %></h3>
+                        <p><%= messages[i].text %></p>
+                    </div>
+                <% } %>
+            </div>
+        <% } %> 
+    <%} else { %>
+        <button onclick="window.location.href='/sign-up'">Sign-up</button>
+        <span>or</span>
+        <button onclick="window.location.href='/log-in'">Log-in</button>
+        <div>
+            <% for(let i=0;i<messages.length;i++) { %>
+                <div>
+                    <h2>Author: anonymous </h2>
+                    <h3><%= messages[i].title %></h3>
+                    <p><%= messages[i].text %></p>
+                </div>
+            <% } %>
+        </div>
+    <% } %>
 </body>
 </html>

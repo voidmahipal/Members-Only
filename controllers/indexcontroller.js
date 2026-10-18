@@ -10,7 +10,8 @@ async function createUser(req,res,next) {
 
     const {firstname,lastname,username,password,confirmpassword} = req.body;
     if(password!==confirmpassword) {
-        
+        res.redirect("/sign-up");
+        return;
     }
     try{
         const hashedPassword = await bcrypt.hash(password,10);
