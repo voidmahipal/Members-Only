@@ -1,0 +1,480 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --primary: #5469d4;
+    --primary-hover: #4054ba;
+    --background: #f6f7fb;
+    --surface: #ffffff;
+    --text: #252b3b;
+    --muted: #7b8497;
+    --border: #e4e7ef;
+    --danger: #d95360;
+    --danger-light: #fff0f1;
+    --radius: 12px;
+    --shadow: 0 3px 15px rgba(35, 45, 80, 0.05);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--background);
+    color: var(--text);
+    min-height: 100vh;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 45px 25px 70px;
+    line-height: 1.6;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    background: var(--primary);
+    color: white;
+    border: 1px solid var(--primary);
+    border-radius: 9px;
+    padding: 11px 19px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease,
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+button:hover {
+    background: var(--primary-hover);
+    border-color: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 9px rgba(84, 105, 212, 0.15);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+button:focus-visible,
+a:focus-visible {
+    outline: 3px solid rgba(84, 105, 212, 0.3);
+    outline-offset: 3px;
+}
+
+a {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+body:not(:has(> form:not([action="/log-out"])))::before {
+    content: "The Message Board ✨";
+    display: block;
+    font-size: clamp(26px, 4vw, 34px);
+    font-weight: 800;
+    letter-spacing: -1.2px;
+    color: var(--text);
+    margin-bottom: 28px;
+    line-height: 1.3;
+}
+
+body > button {
+    margin-right: 8px;
+    margin-bottom: 8px;
+}
+
+body > button[onclick*="/member"],
+body > button[onclick*="/admin"] {
+    background: white;
+    color: var(--primary);
+    border-color: var(--border);
+}
+
+body > button[onclick*="/member"]:hover,
+body > button[onclick*="/admin"]:hover {
+    background: #eef0ff;
+    border-color: var(--primary);
+}
+
+
+body > button[onclick*="/log-in"] {
+    background: white;
+    color: var(--primary);
+    border-color: var(--border);
+}
+
+body > button[onclick*="/log-in"]:hover {
+    background: #eef0ff;
+    border-color: var(--primary);
+}
+
+
+body > span {
+    display: inline-block;
+    margin-right: 10px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+
+body > form[action="/log-out"] {
+    float: right;
+    margin-top: -4px;
+}
+
+body > form[action="/log-out"] button {
+    background: white;
+    color: #6d7485;
+    border: 1px solid var(--border);
+}
+
+body > form[action="/log-out"] button:hover {
+    background: #f0f1f6;
+    color: var(--text);
+    border-color: #cdd2dc;
+    box-shadow: none;
+}
+
+
+
+body > div {
+    clear: both;
+    margin-top: 35px;
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(min(100%, 310px), 1fr)
+    );
+    gap: 20px;
+    align-items: stretch;
+}
+
+
+body > div::before {
+    content: "Recent messages";
+    grid-column: 1 / -1;
+    display: block;
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 2px;
+}
+
+
+body > div > div {
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    padding: 25px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease;
+    min-width: 0;
+}
+
+body > div > div:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 22px rgba(35, 45, 80, 0.08);
+}
+
+
+body > div > div > h2 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #505b73;
+    margin-bottom: 2px;
+    overflow-wrap: anywhere;
+}
+
+
+body > div > div > h3:not(:last-of-type) {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--primary);
+    margin-bottom: 15px;
+    overflow-wrap: anywhere;
+}
+
+
+body > div > div > h3:last-of-type {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 8px;
+    margin-bottom: 12px;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+
+body > div > div > p:first-of-type {
+    font-size: 14px;
+    color: #555f73;
+    line-height: 1.8;
+    margin-bottom: 18px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+
+body > div > div > p:last-of-type:not(:first-of-type) {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: auto;
+    padding-top: 15px;
+    border-top: 1px solid var(--border);
+    overflow-wrap: anywhere;
+}
+
+
+body > div > div > form[action^="/delete/"] {
+    margin-top: 18px;
+}
+
+body > div > div > form[action^="/delete/"] button {
+    width: 100%;
+    background: var(--danger-light);
+    color: var(--danger);
+    border: 1px solid #f9dadd;
+    padding: 10px 15px;
+    font-size: 13px;
+}
+
+body > div > div > form[action^="/delete/"] button:hover {
+    background: var(--danger);
+    color: white;
+    border-color: var(--danger);
+    box-shadow: none;
+}
+
+
+body:has(> form:not([action="/log-out"])) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+body:has(> form:not([action="/log-out"]))::before {
+    display: block;
+    width: 100%;
+    max-width: 440px;
+    font-size: 29px;
+    font-weight: 800;
+    letter-spacing: -0.8px;
+    margin-bottom: 22px;
+    line-height: 1.3;
+    text-align: center;
+}
+
+body:has(> form[action="/sign-up"])::before {
+    content: "Create your account";
+}
+
+body:has(> form[action="/log-in"])::before {
+    content: "Welcome back 👋";
+}
+
+body:has(> form[action="/member"])::before {
+    content: "Join the club ✨";
+}
+
+body:has(> form[action="/admin"])::before {
+    content: "Admin access";
+}
+
+body:has(> form[action^="/messages/"])::before {
+    content: "Write something!";
+}
+
+
+body > form:not([action="/log-out"]) {
+    width: 100%;
+    max-width: 440px;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 35px;
+    box-shadow: 0 8px 30px rgba(35, 45, 80, 0.055);
+}
+
+body > form:not([action="/log-out"]) label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: #4a5366;
+    margin-bottom: 7px;
+}
+
+
+body > form:not([action="/log-out"]) input {
+    width: 100%;
+    min-height: 44px;
+    padding: 11px 13px;
+    background: #fafbfe;
+    border: 1px solid #dce1ea;
+    border-radius: 8px;
+    color: var(--text);
+    font-size: 14px;
+    outline: none;
+    margin-bottom: 21px;
+    transition: border-color 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+body > form:not([action="/log-out"]) input:hover {
+    border-color: #b7c0d3;
+}
+
+body > form:not([action="/log-out"]) input:focus {
+    background: white;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(84, 105, 212, 0.11);
+}
+
+
+body > form:not([action="/log-out"]) button {
+    width: 100%;
+    margin-top: 5px;
+    padding: 13px 18px;
+    font-size: 14px;
+    border-radius: 8px;
+}
+
+
+body > form:not([action="/log-out"]) p {
+    text-align: center;
+    margin-top: 23px;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+body > p {
+    text-align: center;
+    margin-top: 18px;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+
+
+body > form[action^="/messages/"] {
+    max-width: 550px;
+}
+
+body:has(> form[action^="/messages/"])::before {
+    max-width: 550px;
+}
+
+body > form[action^="/messages/"] input[name="text"] {
+    min-height: 75px;
+}
+
+body > form[action="/member"],
+body > form[action="/admin"] {
+    max-width: 400px;
+}
+
+body > form[action="/member"] label,
+body > form[action="/admin"] label {
+    text-align: center;
+    font-size: 14px;
+}
+
+body > form[action="/member"] input,
+body > form[action="/admin"] input {
+    text-align: center;
+    letter-spacing: 2px;
+}
+
+
+
+@media (max-width: 650px) {
+    body {
+        padding: 25px 16px 45px;
+    }
+
+    body:not(:has(> form:not([action="/log-out"])))::before {
+        font-size: 26px;
+        margin-bottom: 24px;
+    }
+
+    body > div {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        margin-top: 25px;
+    }
+
+    body > div > div {
+        padding: 20px;
+    }
+
+    body > div > div > h3:last-of-type {
+        font-size: 18px;
+    }
+
+    body > form:not([action="/log-out"]) {
+        padding: 25px 22px;
+    }
+
+    body:has(> form:not([action="/log-out"]))::before {
+        font-size: 25px;
+    }
+
+    body > button {
+        padding: 10px 13px;
+        font-size: 13px;
+    }
+
+    body > form[action="/log-out"] button {
+        padding: 9px 12px;
+        font-size: 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}
+body > form[action^="/messages/"] textarea {
+    width: 100%;
+    min-height: 150px;
+    padding: 12px 13px;
+    background: #fafbfe;
+    border: 1px solid #dce1ea;
+    border-radius: 8px;
+    color: var(--text);
+    font: inherit;
+    font-size: 14px;
+    line-height: 1.6;
+    outline: none;
+    resize: vertical;
+    margin-bottom: 21px;
+    transition: border-color 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+body > form[action^="/messages/"] textarea:focus {
+    background: white;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(84, 105, 212, 0.11);
+}
