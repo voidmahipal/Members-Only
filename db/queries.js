@@ -21,4 +21,10 @@ async function getUserById(id) {
     const {rows} = await pool.query("SELECT * FROM users WHERE id=$1;",[id]);
     return rows[0];
 }
-export {getAllMessages,addUserInDB,giveMembershipStatus,giveAdminStatus,getUserByUsername,getUserById};
+async function addNewMessage(title,text,userId) {
+    await pool.query("INSERT INTO messages (title,text,userid) VALUES ($1,$2,$3);",[title,text,userId]);
+}
+async function deleteMessage(id) {
+    await pool.query("DELETE FROM messages WHERE id=$1;",[id]);
+}
+export {getAllMessages,addUserInDB,giveMembershipStatus,giveAdminStatus,getUserByUsername,getUserById,addNewMessage,deleteMessage};

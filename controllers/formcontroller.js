@@ -10,5 +10,8 @@ function getMembersForm(req,res,next) {
 function getAdminForm(req,res,next) {
     res.render("adminform");
 }
-
-export {getSignUpForm,getLogInForm,getMembersForm,getAdminForm};
+function getMessageForm(req,res,next) {
+    const {userId} = req.params;
+    res.render("messageform",{userId:userId});
+}
+export {getSignUpForm,getLogInForm,getMembersForm,getAdminForm,getMessageForm};

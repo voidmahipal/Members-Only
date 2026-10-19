@@ -11,7 +11,7 @@
             <button type="submit">Log-out</button>
         </form>
         <% if(user.isadmin) { %>
-            <button>+ New Message</button>
+            <button onclick="window.location.href='/messages/<%=user.id%>'">+ New Message</button>
             <div>
                 <% for(let i=0;i<messages.length;i++) { %>
                     <div>
@@ -20,13 +20,15 @@
                         <h3><%= messages[i].title %></h3>
                         <p><%= messages[i].text %></p>
                         <p>Posted on : <%= messages[i].created_at %> </p>
-                        <button>Delete this message</button>
+                        <form action="/delete/<%=messages[i].id%>" method="post">
+                            <button type="submit">Delete this message</button>
+                        </form>
                     </div>
                 <% } %>
             </div>
         <%} else if(user.ismember) { %>
             <button onclick="window.location.href='/admin'">Become an admin</button>
-            <button>+ New Message</button>
+            <button onclick="window.location.href='/messages/<%=user.id%>'">+ New Message</button>
             <div>
                 <% for(let i=0;i<messages.length;i++) { %>
                     <div>
@@ -40,7 +42,7 @@
             </div>
         <%} else {%>
             <button onclick="window.location.href='/member'" >Become a member</button>
-            <button>+ New Message</button>
+            <button onclick="window.location.href='/messages/<%=user.id%>'" >+ New Message</button>
             <div>
                 <% for(let i=0;i<messages.length;i++) { %>
                     <div>

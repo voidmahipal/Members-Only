@@ -1,6 +1,6 @@
 import "dotenv/config";
 import bcrypt from "bcryptjs";
-import { getAllMessages,addUserInDB,giveMembershipStatus,giveAdminStatus } from "../db/queries.js";
+import { getAllMessages,addUserInDB,giveMembershipStatus,giveAdminStatus,addNewMessage,deleteMessage } from "../db/queries.js";
 
 async function getIndexContent(req,res,next) {
     const messages = await getAllMessages();
@@ -55,5 +55,25 @@ async function addAdmin(req,res,next) {
         next(err);
     }
 }
-
-export {getIndexContent,createUser,logOutUser,addMember,addAdmin};
+async function createNewMessage(req,res,next) {
+    const {title,text} = req.body;
+    const {userId} = req.params;
+    try{
+        await addNewMessage(title,text,userId);
+        res.redirect("/");
+    }
+    catch(err) {
+        next(err);
+    }
+}
+async function deleteMessageById(req,res,next) {
+    const {messageId} = req.params;
+    try{
+        await deleteMessage(messageId);
+        res.redirect("/");
+    }
+    catch(err) {
+        next(err);
+    }
+}
+export {getIndexContent,createUser,logOutUser,addMember,addAdmin,createNewMessage,deleteMessageById};
